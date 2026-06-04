@@ -168,30 +168,6 @@ prior.
 
 ---
 
-## 7. Nonlinear Boundaries via Feature Maps
-
-**Goal:** Carve curved boundaries with a still-linear model.
-
-**Math:** Fit `w` in `ϕ(x)`, not `x`. Circle example: `ϕ = [1, x₁², x₂²]`,
-`w = [−R², 1, 1]` ⇒ boundary `x₁² + x₂² = R²` (§1.1.2).
-
-**Steps:**
-
-1. Generate data separable only by a circle (inner blob = class 0, surrounding
-   ring = class 1).
-2. Fit plain LR in raw `(x₁, x₂)` — it fails; the best _linear_ boundary is
-   useless here.
-3. Map to `ϕ(x) = [1, x₁², x₂²]` (or the full quadratic), refit, and recover the
-   circular boundary.
-4. Build polynomial features up to degree `K` and fit for `K = 1, 2, 4` (your
-   Fig. 10.4). Watch underfit → good fit → overfit, and print the weight
-   magnitudes ballooning with `K` (eq. 16–18).
-5. Re-add the L2 penalty from Step 6 to tame the high-`K` wiggle.
-
-**What you learn:** "Linear" means linear in the _parameters_ — a fixed feature
-map `ϕ` gives nonlinear boundaries while keeping the learning problem convex.
-Degree controls flexibility; regularization controls the resulting overfit.
-
 ---
 
 ## 8. Diagnostics and Evaluation
